@@ -27,6 +27,9 @@
 				},
 				{
 					"name": "derivedColumn2"
+				},
+				{
+					"name": "split1"
 				}
 			],
 			"scriptLines": [
@@ -54,7 +57,9 @@
 				"          promocion_id = iif(isNull(promocion_id), 'Sin Promocion', trim(promocion_id))) ~> derivedColumn1",
 				"derivedColumn1 derive(fecha_pedido = iif(instr(fecha_pedido,'/')>0, toDate(fecha_pedido,'dd/MM/yyyy'), toDate(fecha_pedido,'yyyy-MM-dd')),",
 				"          total_pedido = toDecimal(total_pedido)) ~> derivedColumn2",
-				"derivedColumn2 sink(allowSchemaDrift: true,",
+				"derivedColumn2 split(promocion_id !='' || !isNull(promocion_id),",
+				"     disjoint: false) ~> split1@(valido, rechazado)",
+				"split1@valido sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          venta_id as string,",
