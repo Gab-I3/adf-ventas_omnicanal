@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Data flow1",
+				"name": "Data flow5",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -27,11 +27,11 @@
 				}
 			},
 			{
-				"name": "Data flow2",
+				"name": "Data flow6",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Data flow1",
+						"activity": "Data flow5",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -62,7 +62,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Data flow2",
+						"activity": "Data flow6",
 						"dependencyConditions": [
 							"Succeeded"
 						]
